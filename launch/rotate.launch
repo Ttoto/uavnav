@@ -1,0 +1,27 @@
+<launch>
+
+    <node pkg="uavnav" type="rotate" name="rotate" output="screen">
+
+
+        <!-- takeoff -->
+        <param name="takfoff_speed"      type="double"  value="0.1"/>
+
+
+        <!-- speed rad/sec -->
+        <param name="hover_x"            type="double"  value="0.0"/>
+        <param name="hover_y"            type="double"  value="0.0"/>
+        <param name="hover_z"            type="double"  value="1.3"/>
+        <param name="rotation_speed"     type="double"  value="0.5"/>
+        <param name="rotation_speed_max" type="double"  value="1.0"/>
+        <param name="rotation_speed_min" type="double"  value="0.0"/>
+
+        <!-- landing -->
+        <param name="landing_speed"      type="double"  value="0.1"/>
+        <param name="landing_x"          type="double"  value="0.0"/>
+        <param name="landing_y"          type="double"  value="0.0"/>
+        <param name="landing_z"          type="double"  value="0.0"/>
+
+    </node>
+
+</launch>
+
