@@ -1,0 +1,13 @@
+<launch>
+    <include file="$(find uavnav)/launch/t265.launch"/>
+
+    <node pkg="odom2mavros" type="node_odom2mavros" name="odom2mavros" output="screen">
+        <param name="odom_topic" type="string" value="/camera/odom/sample" />
+        <param name="mavros_topic" type="string" value="/mavros/vision_pose/pose" />
+        <param name="config_file_path" type="string" value="$(find uavnav)/launch/T_IMU_T265.yaml" />
+        <param name="pub_frequency" type="int" value="30" />
+    </node>
+</launch>
+
+
+
