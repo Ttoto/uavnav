@@ -30,8 +30,8 @@ circleTrj::circleTrj(double time,
     this->r = sqrt(dx*dx+dy*dy+dz*dz);
     this->est_t = duration;
     this->length_rad = turn_rad;
-    cout << "radious "  << r << endl;
-    cout << "startyaw " << startyaw << endl;
+//    cout << "radious "  << r << endl;
+//    cout << "startyaw " << startyaw << endl;
     vv_limit = DEFALUT_VV_LIMIT;
     hv_limit = DEFAULT_HV_LIMIT;
     av_limit = DEFAULT_AV_LIMIT;
@@ -44,10 +44,10 @@ void circleTrj::getPose(double time,
     curr_time = time;
     if(est_flag == 0)
     {
-        if(est_t>0.0 && est_t<20.0)
+        if(est_t>0.0 && est_t<1000.0)
         {
             av = length_rad / est_t;
-            cout << "angular velocity " << av << endl;
+            //cout << "angular velocity " << av << endl;
             est_flag = 1;
         }
     }

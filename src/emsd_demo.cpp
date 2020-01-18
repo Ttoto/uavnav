@@ -193,7 +193,6 @@ int main(int argc, char **argv)
                         offb_set_mode.response.mode_sent){
                     ROS_INFO("Offboard enabled");
                 }
-                cout << "change last_request C" << endl;
                 last_request = ros::Time::now();
             } else {
                 if( !current_state.armed &&
@@ -203,7 +202,6 @@ int main(int argc, char **argv)
                         ROS_INFO("Vehicle armed");
                         mission_state = TAKEOFFP1;
                     }
-                    cout << "change last_request" << endl;
                     last_request = ros::Time::now();
                 }
             }
@@ -221,7 +219,6 @@ int main(int argc, char **argv)
             {
                 cout << "Takeoff P1 finished" << endl;
                 mission_state = TAKEOFFP2;
-                cout << "change last_request" << endl;
                 last_request = ros::Time::now();
             }
         }
@@ -235,7 +232,6 @@ int main(int argc, char **argv)
             {
                 mission_state = GOTO_TOUCH_POINT;
                 cout << "Takeoff P2 finished" << endl;
-                cout << "change last_request" << endl;
                 last_request = ros::Time::now();
             }
         }
@@ -253,7 +249,6 @@ int main(int argc, char **argv)
             {
                 mission_state = CIRCLE1;
                 cout << "reached touch point" << endl;
-                cout << "change last_request" << endl;
                 last_request = ros::Time::now();
             }
         }
@@ -271,7 +266,6 @@ int main(int argc, char **argv)
                 circle1.getEnding(tmpposition_x,tmpposition_y,tmpposition_z,tmporientation_yaw);
                 mission_state = CIRCLE2;
                 cout << "circle1_finished" << endl;
-                cout << "change last_request" << endl;
                 last_request = ros::Time::now();
             }
         }
@@ -288,7 +282,6 @@ int main(int argc, char **argv)
                 circle2.getEnding(tmpposition_x,tmpposition_y,tmpposition_z,tmporientation_yaw);
                 mission_state = RETURN;
                 cout << "circle2_finished" << endl;
-                cout << "change last_request" << endl;
                 last_request = ros::Time::now();
             }
         }
@@ -306,7 +299,6 @@ int main(int argc, char **argv)
             {
                 mission_state = LANDING;
                 cout << "reached landing place" << endl;
-                cout << "change last_request" << endl;
                 last_request = ros::Time::now();
             }
         }
@@ -315,7 +307,7 @@ int main(int argc, char **argv)
         if(mission_state==LANDING)
         {
             double secs = (ros::Time::now() - last_request).toSec();
-            cout << secs << endl;
+            //cout << secs << endl;
             pose.pose.position.z = takeoff_z-(secs)*0.1;
             if(pose.pose.position.z < -0.3)
             {

@@ -39,8 +39,8 @@ void generalMove::getPose(double time,
     {
         if(est_t>0.0 && est_t<20.0)
         {
-            cout << "start_yaw" << this->startyaw << endl;
-            cout << "end_yaw" << this->endyaw << endl;
+//            cout << "start_yaw" << this->startyaw << endl;
+//            cout << "end_yaw" << this->endyaw << endl;
             double hv = (sqrt(pow((endx-startx),2)+pow((endy-starty),2)))/est_t;
             double vv = (sqrt(pow((endz-startz),2)))/est_t;
             if (startyaw>=M_PI)  startyaw-=2*M_PI;
