@@ -1,0 +1,9 @@
+<launch>
+    <node pkg="uavnav" type="emsd_demo" name="note_emsd_demo" output="screen">
+        <param name="field_config_file" type="string" value="$(find uavnav)/launch/emsd_field.yaml" />
+        <param name="force_start" type="bool" value="true" />
+    </node>
+</launch>
+
+
+
