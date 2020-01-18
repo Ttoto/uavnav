@@ -316,9 +316,9 @@ int main(int argc, char **argv)
             double secs = (ros::Time::now() - last_request).toSec();
             cout << secs << endl;
             pose.pose.position.z = takeoff_z-(secs)*0.1;
-            if(pose.pose.position.z < 0)
+            if(pose.pose.position.z < -0.3)
             {
-                pose.pose.position.z=0;
+                pose.pose.position.z=-0.3;
                 arm_cmd.request.value = false;
                 if( arming_client.call(arm_cmd) &&
                         arm_cmd.response.success)
@@ -334,7 +334,7 @@ int main(int argc, char **argv)
         {
             pose.pose.position.x = 0;
             pose.pose.position.y = 0;
-            pose.pose.position.z = -0.5;
+            pose.pose.position.z = -0.3;
             return 0;
         }
         //cout  << pose.pose.position.x << "," << pose.pose.position.y << "," << pose.pose.position.z << endl;
