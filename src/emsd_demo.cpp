@@ -102,16 +102,16 @@ int main(int argc, char **argv)
     cout << "circle R: " << touch_to_center.norm() << endl;
 
     ros::Subscriber state_sub = nh.subscribe<mavros_msgs::State>
-            ("mavros/state", 10, state_cb);
+            ("/mavros/state", 10, state_cb);
     ros::Subscriber uavposlp_sub = nh.subscribe<geometry_msgs::PoseStamped>
             ("/mavros/local_position/pose", 10, uav_lp_cb);
 
     ros::Publisher local_pos_pub = nh.advertise<geometry_msgs::PoseStamped>
-            ("mavros/setpoint_position/local", 10);
+            ("/mavros/setpoint_position/local", 10);
     ros::ServiceClient arming_client = nh.serviceClient<mavros_msgs::CommandBool>
-            ("mavros/cmd/arming");
+            ("/mavros/cmd/arming");
     ros::ServiceClient set_mode_client = nh.serviceClient<mavros_msgs::SetMode>
-            ("mavros/set_mode");
+            ("/mavros/set_mode");
 
     //triggle (vio platform test)
     //    ros::Publisher tri_start_pub = nh.advertise<std_msgs::String>("tri_start", 10);
@@ -130,6 +130,7 @@ int main(int argc, char **argv)
         while(ros::ok() && !current_state.connected){
             ros::spinOnce();
             rate.sleep();
+            cout << "Waiting for FCU connection " << endl;
         }
     }
 
@@ -263,7 +264,7 @@ int main(int argc, char **argv)
             static circleTrj circle1(ros::Time::now().toSec(),
                                      touch_point_x,touch_point_y,touch_point_z,
                                      centre_of_circle_x,centre_of_circle_y,centre_of_circle_z,
-                                     -1.5708,5,CIRCLE_TRJ_FACING_CENTER);
+                                     -1.5708,10,CIRCLE_TRJ_FACING_CENTER);
             circle1.getPose(ros::Time::now().toSec(),pose);
             if(circle1.finished())
             {
@@ -280,7 +281,7 @@ int main(int argc, char **argv)
             static circleTrj circle2(ros::Time::now().toSec(),
                                      tmpposition_x,tmpposition_y,tmpposition_z,
                                      centre_of_circle_x,centre_of_circle_y,centre_of_circle_z,
-                                     3.14159,10,CIRCLE_TRJ_FACING_CENTER);
+                                     3.14159,20,CIRCLE_TRJ_FACING_CENTER);
             circle2.getPose(ros::Time::now().toSec(),pose);
             if(circle2.finished())
             {
