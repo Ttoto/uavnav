@@ -1,0 +1,11 @@
+<launch>
+    <node pkg="uavnav" type="straight_trj" name="note_straight_trj" output="screen">
+        <param name="length" type="double" value="6.0" />
+	<param name="height" type="double" value="0.6" />
+	<param name="speed"  type="double" value="0.3" />
+        <param name="force_start" type="bool" value="true" />
+    </node>
+</launch>
+
+
+

@@ -2,8 +2,8 @@
 #define TRJ_CONFIG_H
 
 
-#define DEFALUT_VV_LIMIT     (0.3)
-#define DEFAULT_HV_LIMIT     (0.3)
+#define DEFALUT_VV_LIMIT     (0.7)
+#define DEFAULT_HV_LIMIT     (0.7)
 #define DEFAULT_AV_LIMIT     (0.5)
 
 #define MIN(a, b) ((a < b) ? a : b)

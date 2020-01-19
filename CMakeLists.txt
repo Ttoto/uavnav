@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(uavnav)
-add_compile_options(-std=c++11)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -14,14 +13,11 @@ find_package(catkin REQUIRED COMPONENTS
     mavros_msgs
     geometry_msgs
     )
+## System dependencies are found with CMake's conventions
+# find_package(Boost REQUIRED COMPONENTS system)
 find_package (Eigen3 REQUIRED)
 find_package (yaml-cpp REQUIRED)
 find_package (Sophus REQUIRED )
-
-## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
-
-
 
 
 ###################################
@@ -49,20 +45,23 @@ include_directories(
     ${YAML_CPP_INCLUDE_DIR}
     )
 
-#add_executable(straight_path
-#    src/straight_path.cpp
-#    src/generalmove.cpp
-#    src/generalmove.h)
-#target_link_libraries(straight_path
-#    ${catkin_LIBRARIES}
-#    ${YAML_CPP_LIBRARIES}
-#    )
+######################################################################
+add_executable(straight_trj
+    src/straight_trj.cpp
+    src/movement/generalmove.cpp
+    )
+target_link_libraries(straight_trj
+    ${catkin_LIBRARIES}
+    ${YAML_CPP_LIBRARIES}
+    ${Sophus_LIBRARIES}
+    )
 
+######################################################################
 add_executable(emsd_demo
     src/emsd_demo.cpp
     src/movement/generalmove.cpp
     src/movement/circletrj.cpp
-)
+    )
 target_link_libraries(emsd_demo
     ${catkin_LIBRARIES}
     ${YAML_CPP_LIBRARIES}

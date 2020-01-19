@@ -37,7 +37,7 @@ void generalMove::getPose(double time,
     curr_time = time;
     if(est_flag == 0)
     {
-        if(est_t>0.0 && est_t<20.0)
+        if(est_t>0.0 && est_t<1000.0)
         {
 //            cout << "start_yaw" << this->startyaw << endl;
 //            cout << "end_yaw" << this->endyaw << endl;
