@@ -35,6 +35,7 @@ enum Mission_STATE {
     HOVER,
     GOTO_TOUCH_POINT,
     CIRCLE1,
+    HOVER1,
     CIRCLE2,
     HOVER2,
     RETURN,
@@ -94,9 +95,9 @@ int main(int argc, char **argv)
     touch_point_y = getDoubleVariableFromYaml(configFilePath,"touch_point_y");
     touch_point_z = getDoubleVariableFromYaml(configFilePath,"touch_point_z");
     touch_point = Vec3(touch_point_x,touch_point_y,touch_point_z);
-    cout << "centre_of_circle_x:" << touch_point_x << endl;
-    cout << "centre_of_circle_y:" << touch_point_y << endl;
-    cout << "centre_of_circle_z:" << touch_point_z << endl;
+    cout << "touch_point_x:" << touch_point_x << endl;
+    cout << "touch_point_y:" << touch_point_y << endl;
+    cout << "touch_point_z:" << touch_point_z << endl;
 
     Vec3 touch_to_center = centre_of_circle - touch_point;
     cout << "circle R: " << touch_to_center.norm() << endl;
@@ -259,13 +260,23 @@ int main(int argc, char **argv)
             static circleTrj circle1(ros::Time::now().toSec(),
                                      touch_point_x,touch_point_y,touch_point_z,
                                      centre_of_circle_x,centre_of_circle_y,centre_of_circle_z,
-                                     -1.5708,10,CIRCLE_TRJ_FACING_CENTER);
+                                     -1.3,10,CIRCLE_TRJ_FACING_CENTER);
             circle1.getPose(ros::Time::now().toSec(),pose);
             if(circle1.finished())
             {
                 circle1.getEnding(tmpposition_x,tmpposition_y,tmpposition_z,tmporientation_yaw);
-                mission_state = CIRCLE2;
+                mission_state = HOVER1;
                 cout << "circle1_finished" << endl;
+                last_request = ros::Time::now();
+            }
+        }
+
+        if(mission_state==HOVER1)
+        {
+            if(ros::Time::now()-last_request > ros::Duration(1.0))
+            {
+                mission_state = CIRCLE2;
+                cout << "Hover finished" << endl;
                 last_request = ros::Time::now();
             }
         }
@@ -275,13 +286,23 @@ int main(int argc, char **argv)
             static circleTrj circle2(ros::Time::now().toSec(),
                                      tmpposition_x,tmpposition_y,tmpposition_z,
                                      centre_of_circle_x,centre_of_circle_y,centre_of_circle_z,
-                                     3.14159,20,CIRCLE_TRJ_FACING_CENTER);
+                                     2.6,20,CIRCLE_TRJ_FACING_CENTER);
             circle2.getPose(ros::Time::now().toSec(),pose);
             if(circle2.finished())
             {
                 circle2.getEnding(tmpposition_x,tmpposition_y,tmpposition_z,tmporientation_yaw);
-                mission_state = RETURN;
+                mission_state = HOVER2;
                 cout << "circle2_finished" << endl;
+                last_request = ros::Time::now();
+            }
+        }
+
+        if(mission_state==HOVER2)
+        {
+            if(ros::Time::now()-last_request > ros::Duration(1.0))
+            {
+                mission_state = RETURN;
+                cout << "Hover finished" << endl;
                 last_request = ros::Time::now();
             }
         }
