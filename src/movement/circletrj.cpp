@@ -36,6 +36,7 @@ circleTrj::circleTrj(double time,
     hv_limit = DEFAULT_HV_LIMIT;
     av_limit = DEFAULT_AV_LIMIT;
     est_flag = 0;
+    facingsetup = facing;
 }
 
 void circleTrj::getPose(double time,
@@ -57,8 +58,15 @@ void circleTrj::getPose(double time,
         double x=(cos(startyaw+(dt*av)))*r+centerx;
         double y=(sin(startyaw+(dt*av)))*r+centery;
         double z=centerz;
-        double yaw = atan2(centery-y,centerx-x);
-        Quaterniond q = rpy2Q(Vec3(0,0,yaw));
+        Quaterniond q;
+        if(facingsetup==CIRCLE_TRJ_FACING_CENTER){
+          double yaw = atan2(centery-y,centerx-x);
+          q = rpy2Q(Vec3(0,0,yaw));
+        }
+        if(facingsetup==CIRCLE_TRJ_FACING_FIXED){
+          double yaw = 0;
+          q = rpy2Q(Vec3(0,0,yaw));
+        }
         pose.pose.position.x = x;
         pose.pose.position.y = y;
         pose.pose.position.z = z;

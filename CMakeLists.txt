@@ -67,3 +67,16 @@ target_link_libraries(emsd_demo
     ${YAML_CPP_LIBRARIES}
     ${Sophus_LIBRARIES}
     )
+
+######################################################################
+add_executable(test_trj_fj005
+    src/test_trj_fj005.cpp
+    src/movement/generalmove.cpp
+    src/movement/circletrj.cpp
+    )
+target_link_libraries(test_trj_fj005
+    ${catkin_LIBRARIES}
+    ${YAML_CPP_LIBRARIES}
+    ${Sophus_LIBRARIES}
+    )
+

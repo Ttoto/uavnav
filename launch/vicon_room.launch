@@ -1,0 +1,8 @@
+<launch>
+    <node pkg="uavnav" type="test_trj_fj005" name="note_test_trj_fj005" output="screen">
+        <param name="force_start" type="bool" value="true" />
+    </node>
+</launch>
+
+
+

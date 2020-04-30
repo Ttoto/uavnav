@@ -23,6 +23,7 @@ public:
     int  finished(void);
     void getEnding(double& x, double& y, double& z, double& yaw);
 private:
+    int    facingsetup;
     double centerx,centery,centerz;
     double startx, starty, startz, startyaw;
     double length_rad;
