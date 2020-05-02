@@ -220,7 +220,7 @@ int main(int argc, char **argv)
     {
       static generalMove go2cirlestart(ros::Time::now().toSec(),
                                        takeoff_x,    takeoff_y,  takeoff_z,  0.0,
-                                       takeoff_x+0.7,takeoff_y,  takeoff_z,  0.0, 3);
+                                       takeoff_x+0.8,takeoff_y,  takeoff_z,  0.0, 3);
       go2cirlestart.getPose(ros::Time::now().toSec(),pose);
       if(go2cirlestart.finished())
       {
@@ -234,14 +234,14 @@ int main(int argc, char **argv)
     if(mission_state==CIRCLE1)
     {
       static circleTrj circle1(ros::Time::now().toSec(),
-                               takeoff_x+0.7,takeoff_y,  takeoff_z,
+                               takeoff_x+0.8,takeoff_y,  takeoff_z,
                                takeoff_x,takeoff_y,takeoff_z,
-                               -6.28,10,CIRCLE_TRJ_FACING_FIXED);
+                               -18.85,30,CIRCLE_TRJ_FACING_FIXED);
       circle1.getPose(ros::Time::now().toSec(),pose);
       if(circle1.finished())
       {
         circle1.getEnding(tmpposition_x,tmpposition_y,tmpposition_z,tmporientation_yaw);
-        mission_state = HOVER1;
+        mission_state = HOVER2;
         cout << "circle1_finished" << endl;
         last_request = ros::Time::now();
       }
@@ -335,7 +335,7 @@ int main(int argc, char **argv)
     if(mission_state==RETURN)
     {
       static generalMove gotolanding(ros::Time::now().toSec(),
-                                     takeoff_x+0.7, takeoff_y,   takeoff_z,  0.0,
+                                     takeoff_x+0.8, takeoff_y,   takeoff_z,  0.0,
                                      takeoff_x,takeoff_y,takeoff_z,0.0,
                                      3);
       gotolanding.getPose(ros::Time::now().toSec(),pose);
