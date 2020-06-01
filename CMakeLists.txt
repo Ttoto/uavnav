@@ -80,3 +80,16 @@ target_link_libraries(test_trj_fj005
     ${Sophus_LIBRARIES}
     )
 
+######################################################################
+add_executable(test_trj_8
+    src/test_trj_8.cpp
+    src/movement/generalmove.cpp
+    src/movement/circletrj.cpp
+    )
+target_link_libraries(test_trj_8
+    ${catkin_LIBRARIES}
+    ${YAML_CPP_LIBRARIES}
+    ${Sophus_LIBRARIES}
+    )
+
+
